@@ -3,6 +3,8 @@
 
 CREDENTIALS_DROPBOX = {
 
+"auth_token" : "TOKEN HERE",
+
 
 }
 

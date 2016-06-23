@@ -1,10 +1,11 @@
 
 
 
-class box():
+class Box():
 
     def __init__(self):
-        self.whoami = type(self).__name__
+
+        self.whoami = (self).__class__.__name__
         print self.whoami
 
     def hello(self):

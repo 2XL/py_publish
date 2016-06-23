@@ -1,14 +1,14 @@
 import publisher_credentials
-
-import plugin.box as box
-from plugin.clouddrive import clouddrive
-from plugin.dropbox import dropbox
-from plugin.googledrive import googledrive
-from plugin.mega import mega
-from plugin.onedrive import onedrive
-from plugin.owncloud import owncloud
-from plugin.stacksync import stacksync
-from plugin.sugarsync import sugarsync
+import traceback
+from plugin.box import Box as box
+from plugin.clouddrive import CloudDrive as clouddrive
+from plugin.dropbox import Dropbox as dropbox
+from plugin.googledrive import GoogleDrive as googledrive
+from plugin.mega import Mega as mega
+from plugin.onedrive import OneDrive as onedrive
+from plugin.owncloud import OwnCloud as ownloud
+from plugin.stacksync import StackSync as stacksync
+from plugin.sugarsync import SugarSync as sugarsync
 
 
 class Publisher(object):
@@ -59,4 +59,5 @@ class Publisher(object):
             return 0  # successfully logged to personal cloud service
         except Exception as ex:
             print ex.message
+            print traceback.print_tb(None)
             return 1
