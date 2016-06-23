@@ -12,6 +12,12 @@ from hashlib import md5
 # nosetests /path/to/folder -- suit of test
 
 class publisher_test(unittest.TestCase):
+
+    def test_hello(self):
+        pp = publisher('dropbox')
+        result = pp.hello()
+        self.assertEqual(result, 0)
+
     def test_publish(self):
         pp = publisher('dropbox')
         result = pp.publish('sample/sample.txt', '/')
@@ -27,3 +33,5 @@ class publisher_test(unittest.TestCase):
         original_hash = md5(open('sample/sample.txt', 'rb').read()).hexdigest()
         self.assertEqual(response_hash, original_hash)
         # python check if md5 of [sample/sample.txt] [sample_response/sample.txt] match
+
+
