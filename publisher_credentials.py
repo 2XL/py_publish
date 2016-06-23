@@ -1,0 +1,26 @@
+
+# credentials:
+
+CREDENTIALS_DROPBOX = {
+
+
+}
+
+CREDENTIALS_MEGA = {
+
+}
+
+CREDENTIALS_ONEDRIVE = {
+
+}
+
+CREDENTIALS_OWNCLOUD = {
+
+}
+
+CREDENTIALS_STACKSYNC = {
+
+
+}
+
+
