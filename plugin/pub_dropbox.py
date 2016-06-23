@@ -1,8 +1,5 @@
 import dropbox
-import os
-import sys
 from publisher_credentials import CREDENTIALS_DROPBOX
-
 
 class Dropbox():
     def __init__(self):

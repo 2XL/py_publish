@@ -62,3 +62,10 @@ class Publisher(object):
         #     print ex.message
         #     print traceback.print_tb(None)
         #     return 1
+
+
+if __name__ == "__main__":
+
+    b = box()
+
+    b.publish('sample/sample.txt', 'sample.txt')
