@@ -28,7 +28,7 @@ class PublisherTest(unittest.TestCase):
 
     def test_publish(self):
         pp = Publisher(self.personal_cloud)
-        result = pp.publish(self.test_file_path, self.remote_dir)
+        result = pp.publish(self.test_file_path, self.remote_file_path)
         self.assertEqual(result, 0)  # 0 means published successfully
 
     @unittest.skipUnless(sys.platform.startswith("win"), "requires Windows")
