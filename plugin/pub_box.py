@@ -8,6 +8,10 @@ class Box():
 
         self.whoami = (self).__class__.__name__
         self.client = None
+
+        self.access_token = None
+        self.refresh_token = None
+
         print self.whoami
 
     def hello(self):
@@ -19,12 +23,16 @@ class Box():
         TOKEN = CREDENTIALS_BOX['auth_token']
         CLIENT_ID = CREDENTIALS_BOX['client_id']
         CLIENT_SECRET = CREDENTIALS_BOX['client_secret']
-
+        if self.access_token is None:
+            self.access_token = TOKEN
+        # if self.refresh_token is None:
 
         oauth = boxsdk.OAuth2(
             client_id=CLIENT_ID,
             client_secret=CLIENT_SECRET,
-            access_token=TOKEN,
+            store_tokens=self.store_token_function,
+            access_token=self.access_token,
+            refresh_token=self.refresh_token
         )
         # create instance of box class
 
@@ -48,13 +56,16 @@ class Box():
         TOKEN = CREDENTIALS_BOX['auth_token']
         CLIENT_ID = CREDENTIALS_BOX['client_id']
         CLIENT_SECRET = CREDENTIALS_BOX['client_secret']
-
+        if self.access_token is None:
+            self.access_token = TOKEN
+        # if self.refresh_token is None:
 
         oauth = boxsdk.OAuth2(
             client_id=CLIENT_ID,
             client_secret=CLIENT_SECRET,
-            # access_token=TOKEN,
-            store_tokens=store_token_function
+            store_tokens=self.store_token_function,
+            access_token=self.access_token,
+            refresh_token=self.refresh_token
         )
         # create instance of box class
 
@@ -121,5 +132,6 @@ class Box():
         print "{} say download".format(self.whoami)
 
 
-
-def store_token_function(access_token, refresh_token):
+    def store_token_function(self, access_token, refresh_token):
+        self.access_token = access_token
+        self.refresh_token = refresh_token
