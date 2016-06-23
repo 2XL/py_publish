@@ -1,14 +1,14 @@
 import publisher_credentials
 import traceback
-from plugin.box import Box as box
-from plugin.clouddrive import CloudDrive as clouddrive
-from plugin.dropbox import Dropbox as dropbox
-from plugin.googledrive import GoogleDrive as googledrive
-from plugin.mega import Mega as mega
-from plugin.onedrive import OneDrive as onedrive
-from plugin.owncloud import OwnCloud as ownloud
-from plugin.stacksync import StackSync as stacksync
-from plugin.sugarsync import SugarSync as sugarsync
+from plugin.pub_box import Box as box
+from plugin.pub_clouddrive import CloudDrive as clouddrive
+from plugin.pub_dropbox import Dropbox as dropbox
+from plugin.pub_googledrive import GoogleDrive as googledrive
+from plugin.pub_mega import Mega as mega
+from plugin.pub_onedrive import OneDrive as onedrive
+from plugin.pub_owncloud import OwnCloud as ownloud
+from plugin.pub_stacksync import StackSync as stacksync
+from plugin.pub_sugarsync import SugarSync as sugarsync
 
 
 class Publisher(object):
@@ -23,7 +23,7 @@ class Publisher(object):
         if personal_cloud is None:
             raise NotImplemented
         else:
-            self.action = eval(personal_cloud)()
+            self.action = eval("{}".format(personal_cloud))()
 
     def publish(self, local_file_path, dst_remote_path = "/"):
         """
@@ -54,10 +54,11 @@ class Publisher(object):
             return 1
 
     def hello(self):
-        try:
-            self.action.hello()
-            return 0  # successfully logged to personal cloud service
-        except Exception as ex:
-            print ex.message
-            print traceback.print_tb(None)
-            return 1
+        #try:
+        self.action.hello()
+        return 0
+        #    return 0  # successfully logged to personal cloud service
+        # except Exception as ex:
+        #     print ex.message
+        #     print traceback.print_tb(None)
+        #     return 1
