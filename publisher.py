@@ -1,14 +1,14 @@
 import publisher_credentials
 
 import plugin.box as box
-import plugin.clouddrive as clouddrive
-import plugin.dropbox as dropbox
-import plugin.googledrive as googledrive
-import plugin.mega as mega
-import plugin.onedrive as onedrive
-import plugin.owncloud as owncloud
-import plugin.stacksync as stacksync
-import plugin.sugarsync as sugarsync
+from plugin.clouddrive import clouddrive
+from plugin.dropbox import dropbox
+from plugin.googledrive import googledrive
+from plugin.mega import mega
+from plugin.onedrive import onedrive
+from plugin.owncloud import owncloud
+from plugin.stacksync import stacksync
+from plugin.sugarsync import sugarsync
 
 
 class publisher(object):
@@ -23,7 +23,7 @@ class publisher(object):
         if personal_cloud is None:
             raise NotImplemented
         else:
-            self.action = personal_cloud()
+            self.action = eval(personal_cloud)()
 
     def publish(self, local_file_path, dst_remote_path = "/"):
         """

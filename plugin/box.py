@@ -9,3 +9,10 @@ class box():
 
     def hello(self):
         print "{} say hello".format(self.whoami)
+
+
+    def publish(self, src, tgt):
+        print "{} say publish".format(self.whoami)
+
+    def download(self, remote, local):
+        print "{} say download".format(self.whoami)

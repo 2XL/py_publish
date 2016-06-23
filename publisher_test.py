@@ -3,7 +3,7 @@ import unittest
 import os
 from publisher import publisher
 from hashlib import md5
-
+import sys
 
 # test methods from publisher.py
 
@@ -23,6 +23,7 @@ class publisher_test(unittest.TestCase):
         result = pp.publish('sample/sample.txt', '/')
         self.assertEqual(result, 0)  # 0 means published successfully
 
+    @unittest.skipUnless(sys.platform.startswith("win"), "requires Windows")
     def test_publish_exists(self):
         pp = publisher('dropbox')
         os.remove('sample_response/sample.txt')
