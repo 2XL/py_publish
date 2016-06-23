@@ -11,7 +11,7 @@ from plugin.stacksync import stacksync
 from plugin.sugarsync import sugarsync
 
 
-class publisher(object):
+class Publisher(object):
     '''
     this is the base object file publisher
     '''
