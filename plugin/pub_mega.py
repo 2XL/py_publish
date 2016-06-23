@@ -9,6 +9,9 @@ class Mega():
     def hello(self):
         print "{} say hello".format(self.whoami)
 
+        # how to login with mega
+
+
     def publish(self, src, tgt):
         print "{} say publish".format(self.whoami)
 

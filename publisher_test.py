@@ -14,7 +14,7 @@ import sys
 
 class PublisherTest(unittest.TestCase):
 
-    personal_cloud = "box"
+    personal_cloud = "mega"
     test_file = "sample.txt"
     test_file_path = "sample/{}".format(test_file)
     down_file_path = "sample_response/{}".format(test_file)
