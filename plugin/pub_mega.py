@@ -11,7 +11,6 @@ class Mega():
 
         # how to login with mega
 
-
     def publish(self, src, tgt):
         print "{} say publish".format(self.whoami)
 
