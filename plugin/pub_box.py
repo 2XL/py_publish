@@ -12,14 +12,6 @@ class Box():
         self.access_token = None
         self.refresh_token = None
 
-        print self.whoami
-
-    def hello(self):
-        print "{} say hello".format(self.whoami)
-
-        """
-        Connect and authenticate with box
-        """
         TOKEN = CREDENTIALS_BOX['auth_token']
         CLIENT_ID = CREDENTIALS_BOX['client_id']
         CLIENT_SECRET = CREDENTIALS_BOX['client_secret']
@@ -38,6 +30,14 @@ class Box():
 
         self.client = boxsdk.Client(oauth)
 
+        print self.whoami
+
+    def hello(self):
+        print "{} say hello".format(self.whoami)
+
+        """
+        Connect and authenticate with box
+        """
         app = self.client.user().get()
         print app.name
         print app.login
@@ -53,23 +53,6 @@ class Box():
         """
         Connect and authenticate with box
         """
-        TOKEN = CREDENTIALS_BOX['auth_token']
-        CLIENT_ID = CREDENTIALS_BOX['client_id']
-        CLIENT_SECRET = CREDENTIALS_BOX['client_secret']
-        if self.access_token is None:
-            self.access_token = TOKEN
-        # if self.refresh_token is None:
-
-        oauth = boxsdk.OAuth2(
-            client_id=CLIENT_ID,
-            client_secret=CLIENT_SECRET,
-            store_tokens=self.store_token_function,
-            access_token=self.access_token,
-            refresh_token=self.refresh_token
-        )
-        # create instance of box class
-
-        self.client = boxsdk.Client(oauth)
 
         # upload a file to box
         print src, tgt

@@ -18,7 +18,7 @@ class PublisherTest(unittest.TestCase):
     test_file = "sample.txt"
     test_file_path = "sample/{}".format(test_file)
     down_file_path = "sample_response/{}".format(test_file)
-    remote_dir = "/"
+    remote_dir = "/aaaa/"
     remote_file_path = "{}{}".format(remote_dir, test_file)
 
     def test_hello(self):
@@ -31,16 +31,16 @@ class PublisherTest(unittest.TestCase):
         result = pp.publish(self.test_file_path, self.remote_file_path)
         self.assertEqual(result, 0)  # 0 means published successfully
 
-    @unittest.skipUnless(sys.platform.startswith("win"), "requires Windows")
-    def test_publish_exists(self):
-        pp = Publisher(self.personal_cloud)
-        os.remove(self.down_file_path)
-
-        result = pp.download(self.remote_file_path, self.down_file_path)
-        self.assertEqual(result, 0)
-        response_hash = md5(open(self.down_file_path, 'rb').read()).hexdigest()
-        original_hash = md5(open(self.test_file_path, 'rb').read()).hexdigest()
-        self.assertEqual(response_hash, original_hash)
+    # @unittest.skipUnless(sys.platform.startswith("win"), "requires Windows")
+    # def test_publish_exists(self):
+    #     pp = Publisher(self.personal_cloud)
+    #     os.remove(self.down_file_path)
+    #
+    #     result = pp.download(self.remote_file_path, self.down_file_path)
+    #     self.assertEqual(result, 0)
+    #     response_hash = md5(open(self.down_file_path, 'rb').read()).hexdigest()
+    #     original_hash = md5(open(self.test_file_path, 'rb').read()).hexdigest()
+    #     self.assertEqual(response_hash, original_hash)
         # python check if md5 of [sample/sample.txt] [sample_response/sample.txt] match
 
 

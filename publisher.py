@@ -32,12 +32,12 @@ class Publisher(object):
         :param remote_path:
         :return:
         """
-        try:
-            self.action.publish(local_file_path, dst_remote_path)
-            return 0
-        except Exception as ex:
-            print ex.message
-            return 1
+        # try:
+        self.action.publish(local_file_path, dst_remote_path)
+        return 0
+        # except Exception as ex:
+        #     print ex.message
+        #     return 1
 
     def download(self, remote_file_path, dst_local_path = "sample_response"):
         """
