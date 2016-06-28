@@ -66,6 +66,6 @@ class Publisher(object):
 
 if __name__ == "__main__":
 
-    b = box()
-
-    b.publish('sample/sample.txt', 'sample.txt')
+    b = stacksync()
+    b.hello()
+    # b.publish('sample/sample.txt', 'sample.txt')
