@@ -14,7 +14,7 @@ import sys
 
 class PublisherTest(unittest.TestCase):
 
-    personal_cloud = "googledrive"
+    personal_cloud = "onedrive"
     test_file = "sample.txt"
     test_file_path = "sample/{}".format(test_file)
     down_file_path = "sample_response/{}".format(test_file)

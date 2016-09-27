@@ -1,0 +1,181 @@
+{
+  "access": {
+    "metadata": {
+      "is_admin": 0,
+      "roles": [
+        "09afce5a5e7b4e8c8197e39bd21ba6f5",
+        "ed99b5357f3d4270b5c98730d50eb48e"
+      ]
+    },
+    "serviceCatalog": [
+      {
+        "endpoints": [
+          {
+            "adminURL": "http://localhost:8774/v2/602f0101b8ac4c47a85faa81d5638abc",
+            "id": "e8abaef805434e2abfd398cafd675b6d",
+            "internalURL": "http://localhost:8774/v2/602f0101b8ac4c47a85faa81d5638abc",
+            "publicURL": "http://localhost:8774/v2/602f0101b8ac4c47a85faa81d5638abc",
+            "region": "regionOne"
+          }
+        ],
+        "endpoints_links": [],
+        "name": "nova",
+        "type": "compute"
+      },
+      {
+        "endpoints": [
+          {
+            "adminURL": "http://localhost:9696",
+            "id": "3eb2f592a093460a860bf6d9281e665d",
+            "internalURL": "http://localhost:9696",
+            "publicURL": "http://localhost:9696",
+            "region": "regionOne"
+          }
+        ],
+        "endpoints_links": [],
+        "name": "neutron",
+        "type": "network"
+      },
+      {
+        "endpoints": [
+          {
+            "adminURL": "http://localhost:8776/v2/602f0101b8ac4c47a85faa81d5638abc",
+            "id": "44cc97c468c145c59792d4b256fa3e95",
+            "internalURL": "http://localhost:8776/v2/602f0101b8ac4c47a85faa81d5638abc",
+            "publicURL": "http://localhost:8776/v2/602f0101b8ac4c47a85faa81d5638abc",
+            "region": "regionOne"
+          }
+        ],
+        "endpoints_links": [],
+        "name": "cinderv2",
+        "type": "volumev2"
+      },
+      {
+        "endpoints": [
+          {
+            "adminURL": "http://localhost:9292",
+            "id": "1af674de70dc493f8044d2f8b2534679",
+            "internalURL": "http://localhost:9292",
+            "publicURL": "http://localhost:9292",
+            "region": "regionOne"
+          }
+        ],
+        "endpoints_links": [],
+        "name": "glance",
+        "type": "image"
+      },
+      {
+        "endpoints": [
+          {
+            "adminURL": "http://localhost:8777",
+            "id": "463f6349156e4dbe9097b73423a7e308",
+            "internalURL": "http://localhost:8777",
+            "publicURL": "http://localhost:8777",
+            "region": "regionOne"
+          }
+        ],
+        "endpoints_links": [],
+        "name": "ceilometer",
+        "type": "metering"
+      },
+      {
+        "endpoints": [
+          {
+            "adminURL": "http://localhost:8000/v1",
+            "id": "4083ac3a3cef4d3fa738cbf39ee62c0e",
+            "internalURL": "http://localhost:8000/v1",
+            "publicURL": "http://localhost:8000/v1",
+            "region": "regionOne"
+          }
+        ],
+        "endpoints_links": [],
+        "name": "heat-cfn",
+        "type": "cloudformation"
+      },
+      {
+        "endpoints": [
+          {
+            "adminURL": "http://localhost:8776/v1/602f0101b8ac4c47a85faa81d5638abc",
+            "id": "709edc64493544f1af8531968d1ee8f8",
+            "internalURL": "http://localhost:8776/v1/602f0101b8ac4c47a85faa81d5638abc",
+            "publicURL": "http://localhost:8776/v1/602f0101b8ac4c47a85faa81d5638abc",
+            "region": "regionOne"
+          }
+        ],
+        "endpoints_links": [],
+        "name": "cinder",
+        "type": "volume"
+      },
+      {
+        "endpoints": [
+          {
+            "adminURL": "http://localhost:8004/v1/602f0101b8ac4c47a85faa81d5638abc",
+            "id": "8f36fed5b453464989924c8be006fb6f",
+            "internalURL": "http://localhost:8004/v1/602f0101b8ac4c47a85faa81d5638abc",
+            "publicURL": "http://localhost:8004/v1/602f0101b8ac4c47a85faa81d5638abc",
+            "region": "regionOne"
+          }
+        ],
+        "endpoints_links": [],
+        "name": "heat",
+        "type": "orchestration"
+      },
+      {
+        "endpoints": [
+          {
+            "adminURL": "http://localhost:8080",
+            "id": "1e07b5b5edd9458299848c956ceaee02",
+            "internalURL": "http://localhost:8080/v1/AUTH_602f0101b8ac4c47a85faa81d5638abc",
+            "publicURL": "http://localhost:8080/v1/AUTH_602f0101b8ac4c47a85faa81d5638abc",
+            "region": "regionOne"
+          }
+        ],
+        "endpoints_links": [],
+        "name": "swift",
+        "type": "object-store"
+      },
+      {
+        "endpoints": [
+          {
+            "adminURL": "http://localhost:35357/v2.0",
+            "id": "2673a551b35748529b8b755696038d42",
+            "internalURL": "http://localhost:5000/v2.0",
+            "publicURL": "http://localhost:5000/v2.0",
+            "region": "regionOne"
+          }
+        ],
+        "endpoints_links": [],
+        "name": "keystone",
+        "type": "identity"
+      }
+    ],
+    "token": {
+      "audit_ids": [
+        "bj3u6kuOT82coGrFSzSTfQ"
+      ],
+      "expires": "2015-01-23T13:38:39Z",
+      "id": "771133f1df6b49f18193938429e3a774",
+      "issued_at": "2015-01-23T12:38:39.559761",
+      "tenant": {
+        "description": "Demo Tenant",
+        "enabled": true,
+        "id": "602f0101b8ac4c47a85faa81d5638abc",
+        "name": "demo"
+      }
+    },
+    "user": {
+      "id": "59862a257e5a40eab1fd92e097681eb0",
+      "name": "demo",
+      "roles": [
+        {
+          "name": "swiftoperator"
+        },
+        {
+          "name": "ResellerAdmin"
+        }
+      ],
+      "roles_links": [],
+      "username": "demo"
+    }
+  }
+}

@@ -1,7 +1,10 @@
 import requests
 import json
-
-from requests_oauthlib import OAuth1
+import pprint
+from oauthlib import oauth1
+from oauthlib.common import urlencode, urldecode
+from oauthlib.oauth1 import SIGNATURE_PLAINTEXT, SIGNATURE_TYPE_AUTH_HEADER, SIGNATURE_TYPE_BODY, SIGNATURE_TYPE_QUERY
+import keystoneclient
 from publisher_credentials import CREDENTIALS_STACKSYNC
 
 
@@ -10,35 +13,128 @@ class StackSync():
 
         self.whoami = (self).__class__.__name__
         print self.whoami
-        self.oauth = OAuth1(
+
+        headers = {
+            'Content-Type': 'application/json',
+        }
+
+        data = CREDENTIALS_STACKSYNC['access_token_credentials']
+
+        response = requests.post('http://130.206.36.143:5000/v2.0/tokens', headers=headers, data=data)
+        access_token = json.loads(response.content)  # json...
+        access_token_id = access_token['access']['token']['id']
+        print access_token_id
+
+        headers = {
+            'X-Auth-Token': access_token_id,
+        }
+
+        user_swift_account = CREDENTIALS_STACKSYNC['user']['swift_account']
+        print user_swift_account
+        response = requests.get('http://130.206.36.143:8080/v1/{}'.format(user_swift_account), headers=headers)
+        # print response.content
+
+
+
+        self.client = oauth1.Client(
             client_key=CREDENTIALS_STACKSYNC['client_key'],
             client_secret=CREDENTIALS_STACKSYNC['client_secret'],
-            resource_owner_key=CREDENTIALS_STACKSYNC['resource_owner_key'],
-            resource_owner_secrete=CREDENTIALS_STACKSYNC['resource_owner_secrete'],
+            signature_type=SIGNATURE_TYPE_AUTH_HEADER,
+            signature_method=SIGNATURE_PLAINTEXT,
+            # resource_owner_key=CREDENTIALS_STACKSYNC['resource_owner_key'],
+            # resource_owner_secret=CREDENTIALS_STACKSYNC['resource_owner_secret'],
+            callback_uri='oob'
         )
-        self.server_base_url = "{}{}{}".format(
-            CREDENTIALS_STACKSYNC['swift_url'],
-            CREDENTIALS_STACKSYNC['swift_port'],
-            CREDENTIALS_STACKSYNC['swift_api_version'],
-        )
+
+        # try
+
+        url = "{}{}{}{}".format(CREDENTIALS_STACKSYNC['swift_url'],
+                            CREDENTIALS_STACKSYNC['swift_port'],
+                            CREDENTIALS_STACKSYNC['oauth_endpoint'],
+                            CREDENTIALS_STACKSYNC['request_token_endpoint'])
+
+        uri, headers, _ = self.client.sign(url, http_method='GET')
+        headers['StackSync-API'] = 'v2'
+
+        print uri, headers, _  # _ : deroberately ignored.
+
+        r = requests.get(uri, headers=headers)
+
+        print r.content
+        if r.status_code != 200:
+            assert False
+
+        decoded_data = urldecode(r.text)
+        oauth_response = dict(decoded_data)
+        print oauth_response['oauth_token_secret']
+        print oauth_response['oauth_token']
+
+        '''
+        {u'oauth_token_secret'  : u'Y1qur0rrxkvPyDw2YnF6DKo1c2rNeQ',
+         u'oauth_token'         : u'eZhaQ1Z3EZGOH5l4DFpY4xL6QqFpZt',
+         u'oauth_callback_confirmed': u'true'}
+
+        '''
+        self.oauth_token_secret = oauth_response['oauth_token_secret']
+        self.oauth_token = oauth_response['oauth_token']
+
+        # headers = {
+        #     'X-Auth-Token': access_token_id,
+        #     'stacksync-api': 'true',
+        #     'list': 'true',
+        # }
+
+        #
+        # file_name = 'file_name_here'
+        # requests.get('https://130.206.36.143:8080/v1/{}/stacksync/files?file_name={}&overwrite=true'.format(user_swift_account, file_name)
+        #              , headers=headers)
+        # self.server_base_url = "{}{}{}".format(
+        #     CREDENTIALS_STACKSYNC['swift_url'],
+        #     CREDENTIALS_STACKSYNC['swift_port'],
+        #     CREDENTIALS_STACKSYNC['swift_api_version'],
+        # )
+        #
+        # self.server_auth_url = "{}{}{}{}".format(
+        #     CREDENTIALS_STACKSYNC['swift_url'],
+        #     CREDENTIALS_STACKSYNC['swift_port'],
+        #     CREDENTIALS_STACKSYNC['oauth_endpoint'],
+        #     CREDENTIALS_STACKSYNC['authorize_endpoint'],
+        # )
+        # print self.server_base_url
+        # print self.server_auth_url
+        # headers = {
+        #     "STACKSYNC_API":"v2"
+        # }
+        #
+        # # response = requests.post(
+        #     url=self.server_auth_url,
+        #     auth=self.oauth,
+        #     headers=headers,
+        #     verify=False
+        # )
+        #
+        # print response.content
+
+        self.username = CREDENTIALS_STACKSYNC['login']['username']
+        self.password = CREDENTIALS_STACKSYNC['login']['password']
 
     def hello(self):
         print "{} say hello".format(self.whoami)
 
-        headers = {}
-        folder_id = 0
-        if folder_id and folder_id != 0:
-            url = self.server_base_url + '/folder/' + str(folder_id) + '/contents'
-        else:  # if no folder_id provided -> list root
-            url = self.server_base_url + '/folder/0'
-
-        headers['StackSync-API'] = "v2"
-
-        r = requests.get(url, headers=headers, auth=self.oauth)
-        print 'response status', r
-        print 'response', r.text
-
-        # list root folder content list
+        # headers = {}
+        # folder_id = 0
+        # if folder_id and folder_id != 0:
+        #     url = self.server_base_url + '/folder/' + str(folder_id) + '/contents'
+        # else:  # if no folder_id provided -> list root
+        #     url = self.server_base_url + '/folder/0'
+        #
+        # headers['StackSync-API'] = "v2"
+        #
+        # r = requests.get(url, headers=headers, auth=self.oauth)
+        # print 'response status', r
+        # print 'response', r.text
+        #
+        # # list root folder content list
 
     def publish(self, src, tgt):
         print "{} say publish".format(self.whoami)
@@ -81,7 +177,6 @@ class StackSync():
         r = requests.post(url, data=data, headers=headers, auth=self.oauth)
         print 'response', r
         print 'response', r.text
-
 
     def download(self, remote, local):
         print "{} say download".format(self.whoami)
