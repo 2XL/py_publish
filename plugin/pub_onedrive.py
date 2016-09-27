@@ -1,4 +1,5 @@
 import onedrivesdk
+from publisher_credentials import CREDENTIALS_ONEDRIVE
 from onedrivesdk.helpers import GetAuthCodeServer
 
 class OneDrive():
@@ -12,11 +13,11 @@ class OneDrive():
         self._authenticate_with_helper()
 
     def _authenticate(self):
-        redirect_uri = 'http://localhost:8080/'
-        client_secret = 'TZhtkvAPY22cZcAmkeXrV3E'
-        client_id = 'fcb741cb-be05-4349-80d6-cd4f7926d258'
-        api_base_url = 'https://api.onedrive.com/v1.0/'
-        scopes=['w1.signin', 'w1.offline_access','onedrive.readwrite']
+        redirect_uri = CREDENTIALS_ONEDRIVE["redirect_uri"]
+        client_secret = CREDENTIALS_ONEDRIVE["client_secret"]
+        client_id = CREDENTIALS_ONEDRIVE["client_id"]
+        api_base_url = CREDENTIALS_ONEDRIVE["api_base_url"]
+        scopes = CREDENTIALS_ONEDRIVE["scopes"]
 
         http_provider = onedrivesdk.HttpProvider()
 
@@ -44,11 +45,11 @@ class OneDrive():
 
     def _authenticate_with_helper(self):
 
-        redirect_uri = "http://localhost:8080/"
-        client_secret = "TZhtkvAPY22cZcAmkeXrV3E"
-        scopes=['wl.signin', 'wl.offline_access', 'onedrive.readwrite']
+        redirect_uri = CREDENTIALS_ONEDRIVE["redirect_uri"]
+        client_secret = CREDENTIALS_ONEDRIVE["client_secret"]
+        scopes = CREDENTIALS_ONEDRIVE["scopes"]
         self.client = onedrivesdk.get_default_client(
-            client_id="fcb741cb-be05-4349-80d6-cd4f7926d258",
+            client_id=CREDENTIALS_ONEDRIVE["client_secret"],
             scopes=scopes
         )
 
