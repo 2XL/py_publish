@@ -66,27 +66,53 @@ class OneDrive():
 
     def hello(self):
         print "{} say hello".format(self.whoami)
-        self._authenticate_with_helper()
+        # self._authenticate_with_helper()
 
     def publish(self, src, tgt):
         print "{} say publish".format(self.whoami)
-        self._authenticate_with_helper()
         try:
             self._authenticate_with_helper()
+
+
+
+
         except Exception as ex:
             print ex.message
+            return -1
 
         # f = open(src, 'rb')
-        try:
-            print "publish this {} to {}".format(src, tgt)
-            remote_fileName = '.{}'.format(tgt)
-            local_fileName = '{}'.format(src)
+        # try:
+        print "publish this {} to {}".format(src, tgt)
 
-            # upload file to a certain directory.
-            returned_item = self.client.item(drive='me', id='root').children[local_fileName].upload(remote_fileName)
-            print returned_item
-        except Exception as ex:
-            print ex.message
+        local_fileName = '{}'.format(src)
+        path_array = tgt.split('/')
+        print path_array
+
+        current_folder = self.client.item(drive='me', id='root')
+        idx = 1
+
+        while idx < len(path_array) - 1:
+            print idx, path_array[idx]
+            next_folder = path_array[idx]
+            next_folder_items = current_folder.children.get()
+
+            for count, item in enumerate(next_folder_items):
+                print("{} {}".format(count+1, item.name if item.folder is None else "/"+item.name))
+                if item.name == next_folder:
+                    current_folder = item
+                    break
+                else:
+                    continue
+                continue
+            # next folder, same lookup, ultil all
+        file_name = path_array.pop()
+        print file_name
+        returned_item = current_folder.children[file_name].upload(local_fileName)
+        print "Returned item: {}".format(returned_item)
+
+        # except Exception as ex:
+        # print "Publish failed"
+            # print ex.message
 
 
 

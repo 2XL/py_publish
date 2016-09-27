@@ -18,8 +18,8 @@ class PublisherTest(unittest.TestCase):
     test_file = "sample.txt"
     test_file_path = "sample/{}".format(test_file)
     down_file_path = "sample_response/{}".format(test_file)
-    remote_dir = "/aaaa/"
-    remote_file_path = "{}{}".format(remote_dir, test_file)
+    remote_dir = "/"  # "/aaaa/"
+    remote_file_path = "{}{}".format(remote_dir, test_file)  # always absolute path with dir root
 
     def test_hello(self):
         pp = Publisher(self.personal_cloud)
