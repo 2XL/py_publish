@@ -92,12 +92,12 @@ class OneDrive():
         idx = 1
 
         while idx < len(path_array) - 1:
-            print idx, path_array[idx]
+            # print idx, path_array[idx]
             next_folder = path_array[idx]
             next_folder_items = current_folder.children.get()
 
             for count, item in enumerate(next_folder_items):
-                print("{} {}".format(count+1, item.name if item.folder is None else "/"+item.name))
+                # print("{} {}".format(count+1, item.name if item.folder is None else "/"+item.name))
                 if item.name == next_folder:
                     current_folder = item
                     break
@@ -106,7 +106,7 @@ class OneDrive():
                 continue
             # next folder, same lookup, ultil all
         file_name = path_array.pop()
-        print file_name
+        # print file_name
         returned_item = current_folder.children[file_name].upload(local_fileName)
         print "Returned item: {}".format(returned_item)
 
