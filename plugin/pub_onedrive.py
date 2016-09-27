@@ -7,17 +7,16 @@ class OneDrive():
     def __init__(self):
 
         self.whoami = (self).__class__.__name__
-        print self.whoami
         self.client = None
-
-        self._authenticate_with_helper()
+        print self.whoami
+        ##
 
     def _authenticate(self):
         redirect_uri = CREDENTIALS_ONEDRIVE["redirect_uri"]
         client_secret = CREDENTIALS_ONEDRIVE["client_secret"]
         client_id = CREDENTIALS_ONEDRIVE["client_id"]
         api_base_url = CREDENTIALS_ONEDRIVE["api_base_url"]
-        scopes = CREDENTIALS_ONEDRIVE["scopes"]
+        scopes = ['w1.signin', 'w1.offline_access','onedrive.readwrite']
 
         http_provider = onedrivesdk.HttpProvider()
 
@@ -47,10 +46,12 @@ class OneDrive():
 
         redirect_uri = CREDENTIALS_ONEDRIVE["redirect_uri"]
         client_secret = CREDENTIALS_ONEDRIVE["client_secret"]
-        scopes = CREDENTIALS_ONEDRIVE["scopes"]
+
         self.client = onedrivesdk.get_default_client(
-            client_id=CREDENTIALS_ONEDRIVE["client_secret"],
-            scopes=scopes
+            client_id=CREDENTIALS_ONEDRIVE["client_id"],
+            scopes=['wl.signin',
+                    'wl.offline_access',
+                    'onedrive.readwrite']
         )
 
         auth_url = self.client.auth_provider.get_auth_url(redirect_uri)
@@ -65,9 +66,30 @@ class OneDrive():
 
     def hello(self):
         print "{} say hello".format(self.whoami)
+        self._authenticate_with_helper()
 
     def publish(self, src, tgt):
         print "{} say publish".format(self.whoami)
+        self._authenticate_with_helper()
+        try:
+            self._authenticate_with_helper()
+        except Exception as ex:
+            print ex.message
+
+        # f = open(src, 'rb')
+        try:
+            print "publish this {} to {}".format(src, tgt)
+            remote_fileName = '.{}'.format(tgt)
+            local_fileName = '{}'.format(src)
+
+            # upload file to a certain directory.
+            returned_item = self.client.item(drive='me', id='root').children[local_fileName].upload(remote_fileName)
+            print returned_item
+        except Exception as ex:
+            print ex.message
+
+
+
 
     def download(self, remote, local):
         print "{} say download".format(self.whoami)
