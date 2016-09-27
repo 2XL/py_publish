@@ -13,7 +13,7 @@ class OneDrive():
 
     def _authenticate(self):
         redirect_uri = 'http://localhost:8080/'
-        client_secret = '25107EA031A7DE26B238B9E318D97D755BF3163F'
+        client_secret = 'TZhtkvAPY22cZcAmkeXrV3E'
         client_id = 'fcb741cb-be05-4349-80d6-cd4f7926d258'
         api_base_url = 'https://api.onedrive.com/v1.0/'
         scopes=['w1.signin', 'w1.offline_access','onedrive.readwrite']
@@ -24,8 +24,6 @@ class OneDrive():
             http_provider=http_provider,
             client_id=client_id,
             scopes=scopes,
-
-
         )
 
         client = onedrivesdk.OneDriveClient(
@@ -44,12 +42,10 @@ class OneDrive():
         # print code
         # client.auth_provider.authenticate(code, redirect_uri, client_secret)
 
-
-
     def _authenticate_with_helper(self):
 
         redirect_uri = "http://localhost:8080/"
-        client_secret = "DVB14Cm4LRCuPEjViSfeduD"
+        client_secret = "TZhtkvAPY22cZcAmkeXrV3E"
         scopes=['wl.signin', 'wl.offline_access', 'onedrive.readwrite']
         self.client = onedrivesdk.get_default_client(
             client_id="fcb741cb-be05-4349-80d6-cd4f7926d258",
@@ -57,19 +53,14 @@ class OneDrive():
         )
 
         auth_url = self.client.auth_provider.get_auth_url(redirect_uri)
-
+        print "Auth URL: {}".format(auth_url)
         # this will block until we have the code
 
         code = GetAuthCodeServer.get_auth_code(auth_url=auth_url, redirect_uri=redirect_uri)
-
+        print "Code:     {}".format(code)
         self.client.auth_provider.authenticate(code, redirect_uri, client_secret)
 
-
-
-
-
-
-
+        print "Client Authentication OK"
 
     def hello(self):
         print "{} say hello".format(self.whoami)
